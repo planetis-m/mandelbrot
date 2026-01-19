@@ -8,5 +8,6 @@ license       = "Public Domain"
 requires "nim >= 2.1.0"
 requires "pixie >= 5.0.7"
 requires "https://github.com/planetis-m/vulkan.git >= 1.3.279"
+requires "https://github.com/planetis-m/renderdoc-nim"
 
 include "build_shaders.nims"
