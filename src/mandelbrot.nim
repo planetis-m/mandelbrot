@@ -282,7 +282,7 @@ proc createDescriptorSets(x: var MandelbrotGenerator) =
 proc createComputePipeline(x: var MandelbrotGenerator) =
   # Create the shader module
   let shaderModuleCreateInfo = newVkShaderModuleCreateInfo(
-    code = readFile("../build/shaders/mandelbrot.comp.spv")
+    code = readFile("build/shaders/mandelbrot.comp.spv")
   )
   let computeShaderModule = createShaderModule(x.device, shaderModuleCreateInfo)
   let specializationMapEntries = [
