@@ -28,6 +28,10 @@ proc enumerateInstanceLayerProperties*: seq[VkLayerProperties] =
     if res == VkSuccess and layerCount > 0:
       result.setLen(layerCount)
       res = vkEnumerateInstanceLayerProperties(layerCount.addr, result[0].addr)
+      if res == VkSuccess and layerCount < uint32(result.len):
+        result.setLen(layerCount)
+    elif res == VkSuccess:
+      break
   checkVkResult res
 
 proc createInstance*(instanceCreateInfo: VkInstanceCreateInfo, allocator: ptr VkAllocationCallbacks = nil): VkInstance =
@@ -42,6 +46,10 @@ proc enumeratePhysicalDevices*(instance: VkInstance): seq[VkPhysicalDevice] =
     if res == VkSuccess and physicalDeviceCount > 0:
       result.setLen(physicalDeviceCount)
       res = vkEnumeratePhysicalDevices(instance, physicalDeviceCount.addr, result[0].addr)
+      if res == VkSuccess and physicalDeviceCount < uint32(result.len):
+        result.setLen(physicalDeviceCount)
+    elif res == VkSuccess:
+      break
   checkVkResult res
 
 proc getQueueFamilyProperties*(physicalDevice: VkPhysicalDevice): seq[VkQueueFamilyProperties] =
